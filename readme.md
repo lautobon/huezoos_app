@@ -19,8 +19,14 @@ source <nombre>/Scripts/activate
 ```
 
 # Instalar dependencias
+
+desde la terminal en el root del proyecto ejecutamos:
+
 ```sh
-pip install django-cms
-pip install mysqlclient
-pip install django-environ
+pip install -U -r ./requirements.txt
+```
+
+# Iniciar app local
+```sh
+python manage.py runserver
 ```

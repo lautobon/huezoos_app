@@ -1,0 +1,3 @@
+django-cms
+mysqlclient
+django-environ
