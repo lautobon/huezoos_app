@@ -1,6 +1,6 @@
 # Requerimientos:
-Python 3.9.13
-pip 23.1
+- Python 3.9.13
+- pip 23.1
 
 
 # Instalar ambiente virtual para trabajar con Django
