@@ -1,0 +1,40 @@
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.login-wrapper {
+  margin: 0 auto;
+  max-width: 345px;
+  width: 100%;
+}
+
+.login-logo img {
+  display: block;
+  max-width: 200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mdc-card {
+  font-size: 16px;
+  padding: 20px 16px;
+}
+
+.login-actions {
+  text-align: center;
+}
+
+.login-actions .btn {
+  display: block;
+  margin: 0 auto 16px;
+}

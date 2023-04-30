@@ -1,0 +1,113 @@
+.container-user-data {
+  max-width: 635px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+}
+
+.full-width {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.select-document {
+  display: flex;
+  align-items: center;
+}
+
+.select-document .select-document-dropdown {
+  max-width: 122px;
+  margin-right: 40px;
+}
+
+.select-document .select-document-number {
+  width: 100%;
+} 
+
+.pet-row {
+  display: grid;
+  grid-template-columns: 35% 60%;
+  column-gap: 4%;
+}
+
+.card-left {
+  position: relative;
+}
+
+.card-right {
+  overflow: hidden;
+}
+
+
+.card-right h3 {
+  color: var(--huezoos-theme-gray);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.card-right hr {
+  border-color: var(--huezoos-theme-gray);
+  width: calc(100% + 24px);
+}
+
+.row-field {
+  display: flex;
+}
+
+.row-field .input-field {
+  padding-right: 24px;
+  width: 48%;
+}
+
+.row-field .input-field:last-of-type {
+  padding-right: 0;
+}
+
+.history .input-date i {
+  right: 20px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-register {
+  display: block;
+  margin: 24px auto;
+}
+
+.upload-photo {
+  align-items: center;
+  background-color: #424242;
+  border-radius: 100%;
+  border: 6px solid white;
+  color: white;
+  display: flex;
+  height: 111px;
+  justify-content: center;
+  left: -20px;
+  position: absolute;
+  top: -20px;
+  width: 111px;
+}
+
+.upload-photo .material-icons  {
+  color: white;
+  position: initial;
+}
+
+.container-photo-name {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-photo-name .input-field {
+  width: 70%;
+  margin-right: 0;
+}

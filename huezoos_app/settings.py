@@ -33,10 +33,13 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+STATIC_URL = "static/"
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'booking',
     'djangocms_admin_style',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,8 +53,9 @@ INSTALLED_APPS = [
     'treebeard',
     'sekizai',
     ## Huezoos
-    'agenda'
 ]
+
+AUTH_USER_MODEL = 'booking.Owner'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,6 +75,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'huezoos_app.urls'
+
+
 
 TEMPLATES = [
     {
@@ -138,7 +144,7 @@ LANGUAGES = [
     ('es', 'Spanish'),
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 

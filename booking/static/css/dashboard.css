@@ -1,0 +1,23 @@
+.tabs-admin {
+  background-color: var(--huezoos-theme-secondary);
+  padding-top: 48px;
+  text-align: center;
+  height: auto;
+  top: -58px;
+}
+
+.tabs-admin .tab a {
+  color: white;
+}
+
+.tabs-admin .tab a:hover {
+  color: var(--huezoos-theme-primary);
+}
+
+.tabs-admin .tab a.active {
+  color: white;
+}
+
+.tabs-admin .indicator {
+  background-color: var(--huezoos-theme-primary);
+}

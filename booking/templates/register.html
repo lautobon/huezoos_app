@@ -1,0 +1,32 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+{% block main_content %}
+<form method="post" id="register" class="container">
+    {% csrf_token %}
+    <section class="container-user-data">
+        <div class="input-field">
+            {{form.username.label_tag}}
+            {{form.username}}
+        </div>
+
+        <div class="input-field">
+            {{form.email.label_tag}}
+            {{form.email}}
+        </div>
+
+        <div class="input-field">
+            {{form.password.label_tag}}
+            {{form.password}}
+        </div>
+
+    </section>
+    <button class="btn btn-register btn-primary waves-effect waves-light" type="button" name="submit">
+        Crear Usuario
+    </button>
+</form>
+
+
+{% endblock %}

@@ -25,6 +25,19 @@ desde la terminal en el root del proyecto ejecutamos:
 ```sh
 pip install -U -r ./requirements.txt
 ```
+# variables locales
+
+Crear en la carpeta huezoos_app un archivo `.env` con las siguientes variables:
+
+```sh
+DB_NAME=<DB_NAME>
+DB_USER=<DB_USER>
+DB_PASSWORD=<DB_PASSWORD>
+DB_HOST=<DB_HOST>
+DB_PORT=<DB_PORT>
+SECRET_KEY=<DJANGO_SECRET_KEY>
+```
+
 
 # Iniciar app local
 ```sh
