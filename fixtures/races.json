@@ -1,0 +1,83 @@
+[
+    {
+        "model": "booking.Race",
+        "pk": 1,
+        "fields": {
+            "name": "Criollo",
+            "specie": 1
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 2,
+        "fields": {
+            "name": "Beagle",
+            "specie": 1
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 3,
+        "fields": {
+            "name": "Shitze",
+            "specie": 1
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 4,
+        "fields": {
+            "name": "Labrador",
+            "specie": 1
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 5,
+        "fields": {
+            "name": "Siberiano",
+            "specie": 1
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 6,
+        "fields": {
+            "name": "Criollo",
+            "specie": 2
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 7,
+        "fields": {
+            "name": "Abisinio",
+            "specie": 2
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 8,
+        "fields": {
+            "name": "Asiatico",
+            "specie": 2
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 9,
+        "fields": {
+            "name": "Birmano",
+            "specie": 2
+        }
+    },
+    {
+        "model": "booking.Race",
+        "pk": 10,
+        "fields": {
+            "name": "Siames",
+            "specie": 2
+        }
+    }
+
+]

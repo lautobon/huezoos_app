@@ -1,0 +1,16 @@
+[
+    {
+        "model": "booking.Species",
+        "pk": 1,
+        "fields": {
+            "name": "Perros"
+        }
+    },
+    {
+        "model": "booking.Species",
+        "pk": 2,
+        "fields": {
+            "name": "Gatos"
+        }
+    }
+]

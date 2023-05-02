@@ -4,24 +4,85 @@
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 {% block main_content %}
-<form method="post" id="register" class="container">
+<form method="POST" id="register" class="container">
     {% csrf_token %}
     <section class="container-user-data">
 
         <div class="input-field">
+            {{form.first_name.label_tag}}
+            {{form.first_name}}
+        </div>
+
+        <div class="input-field">
+            {{form.last_name.label_tag}}
+            {{form.last_name}}
+        </div>
+
+        <div class="input-field full-width">
             {{form.email.label_tag}}
             {{form.email}}
         </div>
+
+
+        <div class="full-width select-document">
+
+            <div class="input-field select-document-dropdown">
+                {{form.id_type.label_tag}}
+                {{form.id_type}}
+            </div>
+
+            <div class="input-field select-document-number">
+                {{form.id_no.label_tag}}
+                {{form.id_no}}
+            </div>
+        </div>
+
+        <div class="input-field">
+            {{form.address.label_tag}}
+            {{form.address}}
+        </div>
+
+        <div class="input-field">
+            {{form.city.label_tag}}
+            {{form.city}}
+        </div>
+
+        <div class="input-field">
+            {{form.telephone1.label_tag}}
+            {{form.telephone1}}
+        </div>
+
+        <div class="input-field">
+            {{form.telephone2.label_tag}}
+            {{form.telephone2}}
+        </div>
+
 
         <div class="input-field">
             {{form.password1.label_tag}}
             {{form.password1}}
         </div>
 
+        <div class="input-field">
+            {{form.password2.label_tag}}
+            {{form.password2}}
+        </div>
+
+
+
     </section>
-    <button class="btn btn-register btn-primary waves-effect waves-light" type="button" name="submit">
+    <button class="btn btn-register btn-primary waves-effect waves-light" type="submit" >
         Crear Usuario
     </button>
+
+    {% if errors %}
+
+    {% for fields in errors.values %}
+    {% for error in fields %}
+    <p>{{error}}</p>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
 </form>
 
 

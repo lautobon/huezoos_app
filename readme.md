@@ -38,6 +38,20 @@ DB_PORT=<DB_PORT>
 SECRET_KEY=<DJANGO_SECRET_KEY>
 ```
 
+# Iniciar bd
+
+```sh
+python manage.py makemigrations
+python manage.py migrate 
+```
+
+# Popular bd
+
+```sh
+python manage.py loaddata ./fixtures/species.json
+python manage.py loaddata ./fixtures/races.json
+```
+
 
 # Iniciar app local
 ```sh
