@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager, BaseUserManager
 from django.utils import timezone
 from django.conf import settings
 
@@ -36,54 +36,78 @@ class Race(models.Model):
     specie = models.ForeignKey(Species,
                                on_delete=models.CASCADE,
                                related_name='race_name')
-    
-# class Huezoos_user(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     id_type = models.CharField(max_length=100)
-#     id_no = models.FloatField(max_length=255)
-#     address = models.CharField(max_length=255)
-#     city = models.CharField(max_length=255)
-#     telephone1 = models.FloatField(max_length=255)
-#     telephone2 = models.FloatField(max_length=255, null=True, blank=True)
 
 
-#class Owner(AbstractUser):
-    # user = models.OneToOneField(User, 
-    #                          on_delete=models.CASCADE,
-    #                          related_name='owners')
-    # id_type = models.CharField(max_length=100, null=True, blank=True)
-    # id_no = models.FloatField(max_length=255, null=True, blank=True)
-    # address = models.CharField(max_length=255, null=True, blank=True)
-    # city = models.CharField(max_length=255, null=True, blank=True)
-    # telephone1 = models.FloatField(max_length=255, null=True, blank=True)
-    # telephone2 = models.FloatField(max_length=255, null=True, blank=True)
+class BaseHuezoosUserManager(BaseUserManager):
+    def create_user(self, email, password=None, is_admin=False, is_staff=False, is_active=True, is_superuser=False):
+        if not email:
+            raise ValueError("User must have an email")
+        if not password:
+            raise ValueError("User must have a password")
+        user = self.model(
+            email=self.normalize_email(email)
+        )
+        #user.full_name = full_name
+        user.set_password(password)  # change password to hash
+        # user.profile_picture = profile_picture
+        user.admin = is_admin
+        user.staff = is_staff
+        user.superuser = is_superuser
+        user.active = is_active
+        user.save(using=self._db)
+        return user
+        
+    def create_superuser(self, email, password=None, is_admin=True, is_staff=True, **extra_fields):
+        if not email:
+            raise ValueError("User must have an email")
+        if not password:
+            raise ValueError("User must have a password")
 
-    # def get_pets(self):
-    #     return self.pet_name.all()
+        # user = self.model(
+        #     email=self.normalize_email(email)
+        # )
+        # user.full_name = full_name
+        # user.set_password(password)
+        # user.profile_picture = profile_picture
+        # user.admin = True
+        # user.staff = True
+        # user.active = True
+        # user.save(using=self._db)
+        return self.create_user(email, password, is_admin=True, is_staff=True, is_superuser=True)
 
-class Owner(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=30, unique=True)
+class HuezoosUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    id_type = models.CharField(max_length=100)
+    id_no = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    telephone1 = models.CharField(max_length=255)
+    telephone2 = models.CharField(max_length=255)
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'id_type', 'id_no', 'address', 'telephone1']
 
-    def __str__(self):
-        return self.email
+    objects = BaseHuezoosUserManager()
 
     class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'
 
-# class Manager(models.Model):
-#     staff = models.ForeignKey(Huezoos_user,
-#                               on_delete=models.CASCADE,
-#                               related_name='managers')
+class Owner(HuezoosUser):
+    role = models.CharField(max_length=255, default='responsable')
 
+    def get_pets(self):
+        return self.pet_name.all()
+
+
+class Manager(HuezoosUser):
+    role = models.CharField(max_length=255, default='gestor')
+
+    
 class Pet(models.Model):
     name = models.CharField(max_length=255)
     age = models.FloatField(max_length=30)

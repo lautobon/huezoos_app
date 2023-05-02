@@ -4,4 +4,4 @@ from .models import Owner
 class RegisterForm(UserCreationForm):
     class Meta:
         model = Owner
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'id_type', 'id_no', 'address', 'city', 'telephone1', 'telephone2')

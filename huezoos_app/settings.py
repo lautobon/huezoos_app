@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     ## Huezoos
 ]
 
-AUTH_USER_MODEL = 'booking.Owner'
+AUTH_USER_MODEL = 'booking.HuezoosUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

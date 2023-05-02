@@ -25,7 +25,7 @@ desde la terminal en el root del proyecto ejecutamos:
 ```sh
 pip install -U -r ./requirements.txt
 ```
-# variables locales
+# Variables locales
 
 Crear en la carpeta huezoos_app un archivo `.env` con las siguientes variables:
 

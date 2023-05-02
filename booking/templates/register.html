@@ -7,10 +7,6 @@
 <form method="post" id="register" class="container">
     {% csrf_token %}
     <section class="container-user-data">
-        <div class="input-field">
-            {{form.username.label_tag}}
-            {{form.username}}
-        </div>
 
         <div class="input-field">
             {{form.email.label_tag}}
@@ -18,8 +14,8 @@
         </div>
 
         <div class="input-field">
-            {{form.password.label_tag}}
-            {{form.password}}
+            {{form.password1.label_tag}}
+            {{form.password1}}
         </div>
 
     </section>
