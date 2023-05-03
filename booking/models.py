@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager, BaseUserManager
 from django.utils import timezone
 from django.conf import settings
+from datetime import date, datetime, time
 
 # Create your models here.
 
@@ -20,7 +21,13 @@ SERVICIOS = (
 HORARIOS = (
     ("8:00 AM", "8:00 AM"),
     ("9:00 AM", "9:00 AM"),
-    ("10:00 AM", "10:00 AM")
+    ("10:00 AM", "10:00 AM"),
+    ("11:00 AM", "11:00 AM"),
+    ("12:00 PM", "12:00 PM"),
+    ("2:00 PM", "2:00 PM"),
+    ("3:00 PM", "3:00 PM"),
+    ("4:00 PM", "4:00 PM"),
+    ("5:00 PM", "5:00 PM")
 )
 
 
@@ -122,6 +129,10 @@ class Pet(models.Model):
 class Appointment(models.Model):
     user = models.ForeignKey(Owner,
                              on_delete=models.CASCADE)
+    pet = models.ForeignKey(Owner,
+                            on_delete=models.CASCADE)
     service = models.CharField(max_length=255, choices=SERVICIOS, default="Control")
     date_service = models.DateField(default=timezone.now)
     hour_service = models.CharField(max_length=255, choices=HORARIOS, default="8:00 AM")
+    def __str__(self):
+        return f"{self.user.username} | day: {self.day} | time: {self.time}"

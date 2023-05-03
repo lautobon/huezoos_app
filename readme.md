@@ -1,6 +1,7 @@
 # Requerimientos:
 - Python 3.9.13
 - pip 23.1
+- MySql
 
 
 # Instalar ambiente virtual para trabajar con Django
@@ -20,7 +21,7 @@ source <nombre>/Scripts/activate
 
 # Instalar dependencias
 
-desde la terminal en el root del proyecto ejecutamos:
+Desde la terminal en el root del proyecto ejecutamos:
 
 ```sh
 pip install -U -r ./requirements.txt
@@ -38,6 +39,12 @@ DB_PORT=<DB_PORT>
 SECRET_KEY=<DJANGO_SECRET_KEY>
 ```
 
+# Crear bd
+
+```sh
+CREATE DATABASE huezoos_db;
+```
+
 # Iniciar bd
 
 ```sh
@@ -52,8 +59,8 @@ python manage.py loaddata ./fixtures/species.json
 python manage.py loaddata ./fixtures/races.json
 ```
 
-
 # Iniciar app local
+
 ```sh
 python manage.py runserver
 ```
