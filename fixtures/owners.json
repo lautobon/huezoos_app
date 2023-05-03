@@ -1,0 +1,9 @@
+[
+{
+    "model": "booking.owner",
+    "pk": 2,
+    "fields": {
+        "role": "responsable"
+    }
+}
+]

@@ -1,0 +1,46 @@
+[
+{
+    "model": "booking.huezoosuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$SnRpSu6gQm5ogfbevjmLUN$JEXRFsv+y7wDacHM6WxLQAXeJHH/bm/99QVA+TfX6pM=",
+        "last_login": null,
+        "is_superuser": true,
+        "email": "admin@admin.com",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_staff": true,
+        "id_type": "",
+        "id_no": "",
+        "address": "",
+        "city": "",
+        "telephone1": "",
+        "telephone2": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "booking.huezoosuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$mDidAFyZpJJebX8WGjUqkl$iBGzxbIDMImEeEiDH3ItryN5+0uJGP01d7IQyyGt2LA=",
+        "last_login": "2023-05-03T20:51:05.172Z",
+        "is_superuser": false,
+        "email": "cris@gmail.com",
+        "first_name": "Cris",
+        "last_name": "Cortes",
+        "is_active": true,
+        "is_staff": false,
+        "id_type": "cc",
+        "id_no": "1111111",
+        "address": "cccc",
+        "city": "bog",
+        "telephone1": "121231321",
+        "telephone2": "1231321",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

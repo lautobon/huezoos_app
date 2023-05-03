@@ -106,7 +106,7 @@ class HuezoosUser(AbstractBaseUser, PermissionsMixin):
 
 class Owner(HuezoosUser):
     role = models.CharField(max_length=255, default='responsable')
-
+    
     def get_pets(self):
         return self.pet_name.all()
 
@@ -129,8 +129,6 @@ class Pet(models.Model):
 class Appointment(models.Model):
     user = models.ForeignKey(Owner,
                              on_delete=models.CASCADE)
-    pet = models.ForeignKey(Owner,
-                            on_delete=models.CASCADE)
     service = models.CharField(max_length=255, choices=SERVICIOS, default="Control")
     date_service = models.DateField(default=timezone.now)
     hour_service = models.CharField(max_length=255, choices=HORARIOS, default="8:00 AM")

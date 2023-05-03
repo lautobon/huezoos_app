@@ -41,7 +41,7 @@ SECRET_KEY=<DJANGO_SECRET_KEY>
 
 # Crear bd
 
-```sh
+```sh mysql
 CREATE DATABASE huezoos_db;
 ```
 
@@ -57,6 +57,8 @@ python manage.py migrate
 ```sh
 python manage.py loaddata ./fixtures/species.json
 python manage.py loaddata ./fixtures/races.json
+python manage.py loaddata ./fixtures/users.json
+python manage.py loaddata ./fixtures/owners.json
 ```
 
 # Iniciar app local
