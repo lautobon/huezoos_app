@@ -27,8 +27,13 @@
         <div class="full-width select-document">
 
             <div class="input-field select-document-dropdown">
-                {{form.id_type.label_tag}}
-                {{form.id_type}}
+             
+                <select name="{{ form.id_type.name }}">
+                    <option value="" disabled selected>Tipo Doc</option>
+                    {% for choice in form.id_type.field.choices %}
+                    <option value="{{ choice.0 }}">{{ choice.0 }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <div class="input-field select-document-number">
@@ -71,13 +76,13 @@
 
 
     </section>
-    <button class="btn btn-register btn-primary waves-effect waves-light" type="submit" >
+    <button class="btn btn-register btn-primary waves-effect waves-light" type="submit">
         Crear Usuario
     </button>
 
     <!-- Inicio seccion mascotas-->
 
-      <!--/ Fin mascotas -->
+    <!--/ Fin mascotas -->
 
     {% if errors %}
 
@@ -90,4 +95,16 @@
 </form>
 
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var select = document.querySelectorAll('select');
+        var selectInstance = M.FormSelect.init(select, {});
+
+        var datePicker = document.querySelectorAll('.datepicker');
+        var datePickerInstance = M.Datepicker.init(datePicker, {});
+    });
+</script>
 {% endblock %}

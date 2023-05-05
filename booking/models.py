@@ -3,32 +3,9 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.utils import timezone
 from django.conf import settings
 from datetime import date, datetime, time
+from .constants import SERVICIOS, HORARIOS, GENERO, TIPOS_ID
 
 # Create your models here.
-
-SERVICIOS = (
-    ("Control", "Control"),
-    ("Consulta", "Consulta"),
-    ("Cirugía", "Cirugía"),
-    ("Profilaxis", "Profilaxis"),
-    ("Baño medicado", "Baño medicado"),
-    ("Baño basico", "Baño basico"),
-    ("Spa", "Spa"),
-    ("Implante chip", "Implante chip"),
-    ("Vacuna", "Vacuna")
-)
-
-HORARIOS = (
-    ("8:00 AM", "8:00 AM"),
-    ("9:00 AM", "9:00 AM"),
-    ("10:00 AM", "10:00 AM"),
-    ("11:00 AM", "11:00 AM"),
-    ("12:00 PM", "12:00 PM"),
-    ("2:00 PM", "2:00 PM"),
-    ("3:00 PM", "3:00 PM"),
-    ("4:00 PM", "4:00 PM"),
-    ("5:00 PM", "5:00 PM")
-)
 
 
 class Species(models.Model):
@@ -88,7 +65,7 @@ class HuezoosUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    id_type = models.CharField(max_length=100)
+    id_type = models.CharField(max_length=100, choices=TIPOS_ID, default="CC")
     id_no = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -111,7 +88,7 @@ class Owner(HuezoosUser):
         return self.pet_name.all()
 
 
-class Manager(HuezoosUser):
+class HuezoosManager(HuezoosUser):
     role = models.CharField(max_length=255, default='gestor')
 
     
@@ -125,12 +102,15 @@ class Pet(models.Model):
     race = models.ForeignKey(Race,
                              on_delete=models.CASCADE,
                              related_name='pet_race')
+    gender = models.CharField(max_length=255, choices=GENERO)
     
 class Appointment(models.Model):
     user = models.ForeignKey(Owner,
                              on_delete=models.CASCADE)
+    selected_pet = models.ForeignKey(Pet,on_delete=models.CASCADE)
     service = models.CharField(max_length=255, choices=SERVICIOS, default="Control")
     date_service = models.DateField(default=timezone.now)
     hour_service = models.CharField(max_length=255, choices=HORARIOS, default="8:00 AM")
+    details = models.CharField(max_length=255, null=True, blank=True)
     def __str__(self):
         return f"{self.user.username} | day: {self.day} | time: {self.time}"

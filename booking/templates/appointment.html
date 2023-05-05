@@ -1,0 +1,72 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/agenda.css' %}">
+{% endblock %}
+{% block main_content %}
+<form method="POST" id="agenda" class="container">
+    {% csrf_token %}
+    {{form.as_p}}
+    <section class="container-user-data">
+        <p>Con estos simples pasos puedes agendar un servicio para tu mascota</p>
+
+        <div class="content">
+            <div class="col">
+                <div class="input-field">
+                    <select class="icons">
+                        <option value="" disabled selected>Mascota</option>
+                        <option value="" data-icon="https://images.dog.ceo/breeds/terrier-lakeland/n02095570_3493.jpg">
+                            Rocky
+                        </option>
+                        <option value="" data-icon="https://placekitten.com/210/210">Mercurio</option>
+                    </select>
+                    <label>1. Selecciona tu mascota</label>
+                </div>
+
+                <div class="input-field input-date">
+                    <input id="fechaControl" type="text" class="datepicker" name="date_service">
+                    <label for="fechaControl">2. Selecciona una fecha</label>
+                    <i class="material-icons">date_range</i>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="input-field">
+                    <select name="service">
+                        <option value="" disabled selected>-</option>
+                        {% if services %}
+                        {% for options in services %}
+                        <option value="{{options.0}}">{{options.1}}</option>
+                        {% endfor %}
+                        {% endif %}
+                    </select>
+                    <label>3. Selecciona un servicio</label>
+                </div>
+
+                <div class="input-field">
+                    <textarea id="comments" class="materialize-textarea"></textarea>
+                    <label for="comments">Observaciones</label>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn btn-center btn-primary waves-effect waves-light" type="submit" name="submit">
+            Agendar
+        </button>
+    </section>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var select = document.querySelectorAll('select');
+        var selectInstance = M.FormSelect.init(select, {});
+
+        var datePicker = document.querySelectorAll('.datepicker');
+        var datePickerInstance = M.Datepicker.init(datePicker, {});
+    });
+</script>
+{% endblock %}

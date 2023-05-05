@@ -1,0 +1,14 @@
+[
+{
+    "model": "booking.pet",
+    "pk": 1,
+    "fields": {
+        "name": "Rocky",
+        "age": 3.0,
+        "birthday": "2023-05-05",
+        "owner": 2,
+        "race": 2,
+        "gender": "M"
+    }
+}
+]
