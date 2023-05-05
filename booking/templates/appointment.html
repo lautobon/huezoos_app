@@ -13,12 +13,16 @@
         <div class="content">
             <div class="col">
                 <div class="input-field">
-                    <select class="icons">
+                    
+                    <select class="icons" name="selected_pet">
                         <option value="" disabled selected>Mascota</option>
-                        <option value="" data-icon="https://images.dog.ceo/breeds/terrier-lakeland/n02095570_3493.jpg">
+                        <!-- <option value="" data-icon="https://images.dog.ceo/breeds/terrier-lakeland/n02095570_3493.jpg">
                             Rocky
                         </option>
-                        <option value="" data-icon="https://placekitten.com/210/210">Mercurio</option>
+                        <option value="" data-icon="https://placekitten.com/210/210">Mercurio</option> -->
+                        {% for pet in pets %}
+                        <option value="{{ pet.id }}">{{ pet.name }}</option>
+                        {% endfor %}
                     </select>
                     <label>1. Selecciona tu mascota</label>
                 </div>
@@ -44,14 +48,14 @@
                 </div>
 
                 <div class="input-field">
-                    <textarea id="comments" class="materialize-textarea"></textarea>
+                    <textarea id="comments" class="materialize-textarea" name="details"></textarea>
                     <label for="comments">Observaciones</label>
                 </div>
             </div>
 
         </div>
 
-        <button class="btn btn-center btn-primary waves-effect waves-light" type="submit" name="submit">
+        <button class="btn btn-center btn-primary waves-effect waves-light" type="submit" >
             Agendar
         </button>
     </section>
@@ -66,7 +70,7 @@
         var selectInstance = M.FormSelect.init(select, {});
 
         var datePicker = document.querySelectorAll('.datepicker');
-        var datePickerInstance = M.Datepicker.init(datePicker, {});
+        var datePickerInstance = M.Datepicker.init(datePicker, {format: 'yyyy-mm-dd'});
     });
 </script>
 {% endblock %}

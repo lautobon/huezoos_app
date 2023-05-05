@@ -10,5 +10,17 @@
         "race": 2,
         "gender": "M"
     }
+},
+{
+    "model": "booking.pet",
+    "pk": 2,
+    "fields": {
+        "name": "Mercurio",
+        "age": 3.0,
+        "birthday": "2023-05-05",
+        "owner": 2,
+        "race": 9,
+        "gender": "M"
+    }
 }
 ]

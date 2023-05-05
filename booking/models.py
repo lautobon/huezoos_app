@@ -85,7 +85,7 @@ class Owner(HuezoosUser):
     role = models.CharField(max_length=255, default='responsable')
     
     def get_pets(self):
-        return self.pet_name.all()
+        return self.objects.get()
 
 
 class HuezoosManager(HuezoosUser):

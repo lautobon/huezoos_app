@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime
 from django.http import HttpResponse
 from .forms import RegisterForm
 from django.utils import timezone, dateformat
@@ -72,13 +73,36 @@ def register_form(request):
 
 @login_required
 def user_appointment(request):
-    user= request.user
-    owner= Owner.objects.get(email=user)
-    if user.is_authenticated:
+    user=request.user
 
-        return render(request, 'appointment.html', {'services': SERVICIOS})
-        # appointment= Appointment(service='Control', hour_service='8:00 AM', date_service=dateformat.format(timezone.now(),  'Y-m-d'), user=owner)
-        # appointment.save()
+
+    if user.is_authenticated:
+        owner:Owner = Owner.objects.get(email=user)
+        # Obtener todo y filtrar por 1 criterio
+        pets= Pet.objects.all().filter(owner_id=owner.pk)
+
+        if request.method == 'POST':
+
+            parsed_selected_date = datetime.strptime(request.POST['date_service'], '%Y-%m-%d')
+            # Obtener 1 registro de la bd tabla pet
+            selected_pet = Pet.objects.get(id=request.POST['selected_pet'])
+           
+            appointment= Appointment(
+                service=request.POST['service'],
+                hour_service='8:00 AM',
+                date_service=dateformat.format(parsed_selected_date,  'Y-m-d'),
+                user=owner,
+                selected_pet=selected_pet,
+                details=request.POST['details']
+            )
+            # Enviar info a bd
+            appointment.save()
+
+            # Enviar a usuario GET 
+            return render(request, 'appointment_success.html')
+
+        return render(request, 'appointment.html', {'services': SERVICIOS, 'pets': pets})
+        
     else:
         return redirect('login')
 
