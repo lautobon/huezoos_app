@@ -94,7 +94,7 @@ class HuezoosManager(HuezoosUser):
     
 class Pet(models.Model):
     name = models.CharField(max_length=255)
-    age = models.FloatField(max_length=30)
+    age = models.SmallIntegerField()
     birthday = models.DateField(default=timezone.now)
     owner = models.ForeignKey(Owner,
                               on_delete=models.CASCADE,

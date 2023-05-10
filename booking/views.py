@@ -11,17 +11,26 @@ from .constants import SERVICIOS, HORARIOS, GENERO
 # Create your views here.
 
 
-def home(request):
-    return HttpResponse('joli')
-
 @login_required
 def auth_home(request):
     user = request.user
-    context = {}
     if user.is_authenticated:
-        context['msn'] = 'Autenticado'
+   
+        owner:Owner = Owner.objects.get(email=user)
+        user_id = owner.pk
+        # Obtener todo y filtrar por 1 criterio
+        pets: list[Pet] = Pet.objects.all().filter(owner_id=user_id)
+        appointments: list[Appointment] = Appointment.objects.all().filter(user_id=user_id)
 
-    return render(request, 'index.html', context)
+        if request.method == 'POST' and request.path == '/appointment/cancel':
+            Appointment.objects.filter(id=request.POST["appointment_id"]).delete()
+
+            return redirect('home')
+
+        return render(request, 'home_user.html', {'user': owner, 'pets': pets, 'appointments': appointments})
+
+    return render(request, 'login.html', {}) 
+
 
 def login_huezoos(request):
     if request.method == 'POST':
@@ -34,7 +43,7 @@ def login_huezoos(request):
             login(request, user)
             return redirect('home')
         
-        return redirect('index')
+        return redirect('login')
 
     else:
         return render(request, 'login.html', {})
@@ -97,7 +106,7 @@ def user_appointment(request):
             )
             # Enviar info a bd
             appointment.save()
-
+            
             # Enviar a usuario GET 
             return render(request, 'appointment_success.html')
 
@@ -105,5 +114,8 @@ def user_appointment(request):
         
     else:
         return redirect('login')
+    
+
+
 
 

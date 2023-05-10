@@ -1,0 +1,116 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<main class="default-layout">
+    <!-- Aside -->
+    <aside>
+        <div class="widget">
+            <h3 class="section-title">Perfil propietario</h3>
+
+            <!-- User Card Info -->
+
+            <article class="card card-user-info">
+                <div class="card-content">
+                    <p class="username"><strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
+                    <p class="email"><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                    <p class="text-helper">+57 {{ user.telephone1 }}</p>
+                </div>
+                <i class="material-icons">more_vert</i>
+            </article>
+
+            <!-- /- User Card Info -->
+        </div>
+
+        <div class="widget">
+            <h3 class="section-title">Mascotas</h3>
+            {% for pet in pets %}
+            <article class="card card-pet-info">
+                <div class="card-content">
+                    <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+                    <div class="card-pet-info-details">
+                        <p><strong>{{ pet.name }}</strong></p>
+                        <p>{{ pet.race.specie.name }}, raza: {{ pet.race.name }}, {{ pet.age }} años</p>
+                    </div>
+                    {% if pet.gender == 'F' %}
+                    <i class="icon icon-female"></i>
+                    {% endif %}
+
+                    {% if pet.gender == 'M' %}
+                    <i class="icon icon-male"></i>
+                    {% endif %}
+                </div>
+                <i class="material-icons">more_vert</i>
+            </article>
+
+            {% endfor %}
+
+            <!-- <article class="card card-pet-info">
+                <div class="card-content">
+                    <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+                    <div class="card-pet-info-details">
+                        <p><strong>Mercurio</strong></p>
+                        <p>Gato, 3 años, raza mixta</p>
+                    </div>
+                    <i class="icon icon-male"></i>
+                </div>
+                <i class="material-icons">more_vert</i>
+            </article>
+
+            <article class="card card-pet-info">
+                <div class="card-content">
+                    <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+                    <div class="card-pet-info-details">
+                        <p><strong>Mercuria</strong></p>
+                        <p>Gato, 3 años, raza mixta</p>
+                    </div>
+                    <i class="icon icon-female"></i>
+                </div>
+                <i class="material-icons">more_vert</i>
+            </article> -->
+        </div>
+
+        <button class="btn btn-center waves-effect waves-light" type="button">
+            Agregar mascotas
+        </button>
+    </aside>
+    <!--/- Aside -->
+    <!-- Agenda -->
+    <section>
+        <h3 class="section-title">Citas agendadas</h3>
+
+        {%if appointments.count == 0 %}
+        <p>No hay citas programadas</p>
+        {%endif%}
+
+        {% for appointment in appointments %}
+        <article class="card card-pet-info card-agenda-item">
+            <div class="card-content">
+                <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+                <div class="card-pet-info-details">
+                    <p><strong>{{ appointment.selected_pet.name }}</strong></p>
+                    <p>Fecha servicio: {{ appointment.date_service }} {{ appointment.hour_service }}</p>
+                    <p>Servicio: {{ appointment.service }}</p>
+                    <p>Detalles: {{ appointment.details }}</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <form method="POST" action="/appointment/cancel">
+                    {% csrf_token %}
+                    <input type="hidden" name="appointment_id" value="{{appointment.id}}">
+                    <button type="submit" id="cancelBtn" class="btn btn-bg-color-green1  waves-effect waves-light">Cancelar</button>
+                </form>
+                <button class="btn btn-bg-color-green2 waves-effect waves-light">Editar</button>
+                <button class="btn btn-bg-color-green3 waves-effect waves-light">Detalles</button>
+            </div>
+        </article>
+        {% endfor %}
+        <a class="btn btn-center btn-primary waves-effect waves-light" href="/appointment">
+            Agendar nueva cita
+        </a>
+    </section>
+    <!--/- Agenda -->
+</main>
+
+{% endblock %}
