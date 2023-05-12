@@ -5,11 +5,27 @@
 {% endblock %}
 {% block main_content %}
 
-<h2>Cita agendada</h2>
+<main class="container">
+    <section class="success-message">
 
-<a class="btn btn-center btn-primary waves-effect waves-light" href="/home">
-    Ir a mi perfil
-</a>
+        <h2 class="title">Cita agendada</h2>
+
+        <p>
+            Te esperamos <strong>{{ date_service }}</strong> a las {{ hour_service }} <strong>hora(s)</strong> con <strong>{{ pet_name }}</strong> para <strong>{{ service }}</strong>  
+        </p>
+        <div class="buttons">
+            <a class="btn btn-center btn-primary waves-effect waves-light" href="/appointment">
+                Editar cita
+            </a>
+
+            <a class="btn btn-center btn-bg-color-green3 waves-effect waves-light" href="/home">
+                Ver todas mis citas
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
 
 {% endblock %}
-

@@ -7,13 +7,14 @@
 <form method="POST" id="agenda" class="container">
     {% csrf_token %}
     {{form.as_p}}
+
     <section class="container-user-data">
         <p>Con estos simples pasos puedes agendar un servicio para tu mascota</p>
 
         <div class="content">
             <div class="col">
                 <div class="input-field">
-                    
+
                     <select class="icons" name="selected_pet">
                         <option value="" disabled selected>Mascota</option>
                         <!-- <option value="" data-icon="https://images.dog.ceo/breeds/terrier-lakeland/n02095570_3493.jpg">
@@ -21,14 +22,15 @@
                         </option>
                         <option value="" data-icon="https://placekitten.com/210/210">Mercurio</option> -->
                         {% for pet in pets %}
-                        <option value="{{ pet.id }}">{{ pet.name }}</option>
+                        <option value="{{ pet.id }}" {% if pet.id == edit.selected_pet_id %}selected="selected" {% endif %}>{{ pet.name }}</option>
                         {% endfor %}
                     </select>
                     <label>1. Selecciona tu mascota</label>
                 </div>
 
                 <div class="input-field input-date">
-                    <input id="fechaControl" type="text" class="datepicker" name="date_service">
+                    <input id="fechaControl" type="text" class="datepicker" name="date_service"
+                        value="{{edit.date_service}}">
                     <label for="fechaControl">2. Selecciona una fecha</label>
                     <i class="material-icons">date_range</i>
                 </div>
@@ -37,10 +39,10 @@
             <div class="col">
                 <div class="input-field">
                     <select name="service">
-                        <option value="" disabled selected>-</option>
+                        <option value="" disabled.->-</option>
                         {% if services %}
                         {% for options in services %}
-                        <option value="{{options.0}}">{{options.1}}</option>
+                        <option value="{{options.0}}" {% if options.0 == edit.service %}selected="selected" {% endif %}>{{options.1}}</option>
                         {% endfor %}
                         {% endif %}
                     </select>
@@ -48,14 +50,14 @@
                 </div>
 
                 <div class="input-field">
-                    <textarea id="comments" class="materialize-textarea" name="details"></textarea>
+                    <textarea id="comments" class="materialize-textarea" name="details">{{edit.details}}</textarea>
                     <label for="comments">Observaciones</label>
                 </div>
             </div>
 
         </div>
-
-        <button class="btn btn-center btn-primary waves-effect waves-light" type="submit" >
+        <input type="hidden" name="appointment_id" value="{{edit.id}}">
+        <button class="btn btn-center btn-primary waves-effect waves-light" type="submit">
             Agendar
         </button>
     </section>
@@ -70,7 +72,7 @@
         var selectInstance = M.FormSelect.init(select, {});
 
         var datePicker = document.querySelectorAll('.datepicker');
-        var datePickerInstance = M.Datepicker.init(datePicker, {format: 'yyyy-mm-dd'});
+        var datePickerInstance = M.Datepicker.init(datePicker, { format: 'yyyy-mm-dd' });
     });
 </script>
 {% endblock %}

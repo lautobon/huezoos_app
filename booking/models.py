@@ -112,5 +112,3 @@ class Appointment(models.Model):
     date_service = models.DateField(default=timezone.now)
     hour_service = models.CharField(max_length=255, choices=HORARIOS, default="8:00 AM")
     details = models.CharField(max_length=255, null=True, blank=True)
-    def __str__(self):
-        return f"{self.user.username} | day: {self.day} | time: {self.time}"

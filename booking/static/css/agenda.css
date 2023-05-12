@@ -12,7 +12,7 @@ form {
   justify-content: center;
 }
 
-.container .content{
+.container .content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
@@ -23,4 +23,24 @@ form {
 .select-dropdown li img {
   border-radius: 100%;
   overflow: hidden;
+}
+
+.title {
+  color: var(--huezoos-light-green-3);
+  font-size: 20px;
+  text-align: center;
+}
+
+.success-message {
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.success-message p {
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  margin: 0 auto;
 }
