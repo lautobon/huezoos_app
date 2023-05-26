@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 {% block main_content %}
-<form method="POST" id="register" class="container">
+<form method="POST" id="registerUser" class="container">
     {% csrf_token %}
     <section class="container-user-data">
 
@@ -72,10 +72,110 @@
             {{form.password2.label_tag}}
             {{form.password2}}
         </div>
-
-
-
     </section>
+
+    <hr />
+    <h2 class="subtitle">Mascotas</h2>
+
+    <section id="petContainer" class="container-pets">
+        <article data-pet-row="1" class="pet-row">
+            <!-- General info -->
+            <div class="card card-left">
+                <div class="card-content">
+                    <div class="container-photo-name">
+    
+                        <div class="upload-photo">
+                            <i class="material-icons">cloud_upload</i>
+                        </div>
+    
+                        <div class="input-field input-name">
+                            <input id="pet.1.nombreMascota"  type="text" class="validate"
+                                name="pet.1.nombreMascota">
+                            <label for="pet.1.nombreMascota">Nombre</label>
+                        </div>
+                    </div>
+    
+                    <div class="input-field input-gender">
+                        <input id="pet.1.generoMascota" type="text" class="validate" name="pet.1.generoMascota">
+                        <label for="pet.1.generoMascota">Género</label>
+                    </div>
+    
+                    <div class="input-field input-age">
+                        <input id="pet.1.edadMascota" type="text" class="validate" name="pet.1.edadMascota">
+                        <label for="pet.1.edadMascota">Edad</label>
+                    </div>
+    
+                    <div class="input-field">
+                        <select class="species" name="pet.1.especieMascota">
+                            <option value="" disabled selected>Especie</option>
+                            {% for specie in species %}
+                            <option value="{{ specie.id }}">{{ specie.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+    
+                    <div class="input-field">
+                        <select class="race" name="pet.1.razaMascota">
+                            <option value="" disabled selected>Raza</option>
+                            {% for race in races %}
+                            <option value="{{ race.id }}">{{ race.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+    
+                </div>
+            </div>
+            <!--/ General info -->
+            <!-- datos salud -->
+            <!-- <div class="card card-right">
+                  <div class="card-content">
+                    <h3>Esquema de vacunación</h3>
+        
+                    <div class="lista-vacunas">
+                      <div class="row-field">
+                        <div class="input-field">
+                          <input id="nombreVacuna1" type="text" class="validate">
+                          <label for="nombreVacuna1">Nombre Vacuna</label>
+                        </div>
+        
+                        <div class="input-field input-date">
+                          <input id="fechaVacuna" type="text" class="datepicker">
+                          <label for="fechaVacuna">Fecha aplicación</label>
+                          <i class="material-icons">date_range</i>
+                        </div>
+        
+                        <a class="btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+                      </div>
+        
+                    </div>
+                    
+                    <hr />
+                    <h3>Historial</h3>
+                    <div class="row-field history">
+                      <div class="input-field input-date">
+                        <input id="fechaControl" type="text" class="datepicker">
+                        <label for="fechaControl">Fecha último control</label>
+                        <i class="material-icons">date_range</i>
+                      </div>
+        
+                      <div class="input-field">
+                        <input id="alergias" type="text" class="validate">
+                        <label for="alergias">Alergias</label>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+            <!--/ datos salud -->
+        </article>
+    
+    </section>
+
+    <div class="btn-container">
+        <button id="addPetBtn" class="btn waves-effect waves-light" type="button">
+            Añadir otra mascota
+        </button>
+    </div>
+
     <button class="btn btn-register btn-primary waves-effect waves-light" type="submit">
         Crear Usuario
     </button>
@@ -94,17 +194,100 @@
     {% endif %}
 </form>
 
+<template id="petRowTemplate">
+    <article class="pet-row">
+        <!-- General info -->
+        <div class="card card-left">
+            <div class="card-content">
+                <div class="container-photo-name">
 
+                    <div class="upload-photo">
+                        <i class="material-icons">cloud_upload</i>
+                    </div>
+
+                    <div class="input-field input-name">
+                        <input id="pet.1.nombreMascota" type="text" class="validate" name="pet.1.nombreMascota">
+                        <label for="pet.1.nombreMascota">Nombre</label>
+                    </div>
+                </div>
+
+                <div class="input-field input-gender">
+                    <input id="pet.1.generoMascota" type="text" class="validate" name="pet.1.generoMascota">
+                    <label for="pet.1.generoMascota">Género</label>
+                </div>
+
+                <div class="input-field input-age">
+                    <input id="pet.1.edadMascota" type="text" class="validate" name="pet.1.edadMascota">
+                    <label for="pet.1.edadMascota">Edad</label>
+                </div>
+
+                <div class="input-field">
+                    <select class="species" name="pet.1.especieMascota">
+                        <option value="" disabled selected>Especie</option>
+                        {% for specie in species %}
+                        <option value="{{ specie.id }}">{{ specie.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <select class="race" name="pet.1.razaMascota">
+                        <option value="" disabled selected>Raza</option>
+                        {% for race in races %}
+                        <option value="{{ race.id }}">{{ race.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <!--/ General info -->
+        <!-- datos salud -->
+        <!-- <div class="card card-right">
+        <div class="card-content">
+          <h3>Esquema de vacunación</h3>
+
+          <div class="lista-vacunas">
+            <div class="row-field">
+              <div class="input-field">
+                <input id="nombreVacuna1" type="text" class="validate">
+                <label for="nombreVacuna1">Nombre Vacuna</label>
+              </div>
+
+              <div class="input-field input-date">
+                <input id="fechaVacuna" type="text" class="datepicker">
+                <label for="fechaVacuna">Fecha aplicación</label>
+                <i class="material-icons">date_range</i>
+              </div>
+
+              <a class="btn-floating waves-effect waves-light"><i class="material-icons">add</i></a>
+            </div>
+
+          </div>
+          
+          <hr />
+          <h3>Historial</h3>
+          <div class="row-field history">
+            <div class="input-field input-date">
+              <input id="fechaControl" type="text" class="datepicker">
+              <label for="fechaControl">Fecha último control</label>
+              <i class="material-icons">date_range</i>
+            </div>
+
+            <div class="input-field">
+              <input id="alergias" type="text" class="validate">
+              <label for="alergias">Alergias</label>
+            </div>
+          </div>
+        </div>
+      </div> -->
+        <!--/ datos salud -->
+    </article>
+</template>
 {% endblock %}
 
 {% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var select = document.querySelectorAll('select');
-        var selectInstance = M.FormSelect.init(select, {});
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+<script src="{% static 'js/register.js' %}"></script>
 
-        var datePicker = document.querySelectorAll('.datepicker');
-        var datePickerInstance = M.Datepicker.init(datePicker, {});
-    });
-</script>
 {% endblock %}

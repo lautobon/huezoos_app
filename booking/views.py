@@ -6,7 +6,7 @@ from django.utils import timezone, dateformat
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Appointment, Owner, Pet, Race
+from .models import Appointment, Owner, Pet, Race, Species
 from .constants import SERVICIOS, HORARIOS, GENERO
 # Create your views here.
 
@@ -16,7 +16,7 @@ def auth_home(request):
     user = request.user
     if user.is_authenticated:
    
-        owner:Owner = Owner.objects.get(email=user)
+        owner: Owner = Owner.objects.get(email=user)
         user_id = owner.pk
         # Obtener todo y filtrar por 1 criterio
         pets: list[Pet] = Pet.objects.all().filter(owner_id=user_id)
@@ -50,11 +50,8 @@ def login_huezoos(request):
 
 def register_form(request):
 
-    #print(GENERO.index(0))
-    # races=Race.objects.all()
-    # for race in races:
-    #     for attr, value in race.__dict__.items():
-    #         print(attr, value)
+    races = Race.objects.all()
+    species = Species.objects.all()
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -62,15 +59,7 @@ def register_form(request):
 
             user = form.save()
             
-            # pet = Pet(
-            #     name='Rocky',
-            #     age=3,
-            #     birthday=dateformat.format(timezone.now(),  'Y-m-d'),
-            #     gender='M',
-            #     owner=user,
-            #     race=Race.objects.get(pk=2)
-            # )
-            # pet.save()
+            
             login(request, user)
 
             return redirect('home')
@@ -78,7 +67,7 @@ def register_form(request):
 
         form = RegisterForm()
  
-    return render(request, 'register.html', {'form': form, 'errors': form.errors})
+    return render(request, 'register.html', {'form': form, 'errors': form.errors, 'races': races, 'species': species})
 
 @login_required
 def user_appointment(request):
