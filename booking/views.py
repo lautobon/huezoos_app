@@ -119,12 +119,10 @@ def user_appointment(request):
         appointment_id = request.GET.get('id')
 
         if appointment_id:
-            #appointment_edit = Appointment.objects.filter(user_id=owner.pk).filter(id=appointment_id)
             appointment_edit = Appointment.objects.get(id=appointment_id)
        
             context_edit = appointment_edit
 
-            #return render(request, 'appointment.html', {'services': SERVICIOS, 'pets': pets})
 
         if request.method == 'POST':
 
@@ -162,7 +160,8 @@ def user_appointment(request):
                     'pet_name': selected_pet.name,
                     'date_service': appointment.date_service,
                     'hour_service': appointment.hour_service,
-                    'service': appointment.service
+                    'service': appointment.service,
+                    'id': appointment.id
                 }
 
                 # Enviar a usuario GET 
