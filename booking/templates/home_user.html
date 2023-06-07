@@ -35,7 +35,13 @@
             {% for pet in pets %}
             <article class="card card-pet-info">
                 <div class="card-content">
+                    
+                    {% if pet.race.specie.name == 'Perro' %}
+                    <figure class="card-profile-pic"><img src="https://placedog.net/60/60" alt=""></figure>
+                    {% endif %}
+                    {% if pet.race.specie.name == 'Gato' %}
                     <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+                    {% endif %}
                     <div class="card-pet-info-details">
                         <p><strong>{{ pet.name }}</strong></p>
                         <p>{{ pet.race.specie.name }}, raza: {{ pet.race.name }}, {{ pet.age }} años</p>

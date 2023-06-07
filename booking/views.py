@@ -1,6 +1,8 @@
 from collections import defaultdict
 from django.shortcuts import render
 from datetime import datetime
+
+from .utils import save_user_pets
 from .forms import RegisterForm, UserUpdateForm
 from django.utils import dateformat
 from django.shortcuts import redirect
@@ -32,29 +34,8 @@ def auth_home(request):
         
         if request.method == 'POST' and request.path == '/pet/add':
      
-            for key, value in request.POST.items():
-                if key.startswith('pet'):
-                    field_name = key.split('.')[2]
-                    pet_num = int(key.split('.')[1]) - 1
 
-                    new_dict_pets[pet_num][field_name]=value
-
-            new_dict_pets = list(new_dict_pets.values())
-
-            print(new_dict_pets)
-
-            for petEntry in new_dict_pets:
-
-                race = Race.objects.get(id=petEntry['razaMascota'])
-
-                pet = Pet(
-                    name=petEntry['nombreMascota'],
-                    age=int(petEntry['edadMascota']),
-                    gender=petEntry['generoMascota'],
-                    owner=owner,
-                    race=race
-                )
-                pet.save()
+            save_user_pets(request.POST, owner)
 
             return redirect('home')
 
