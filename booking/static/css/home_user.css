@@ -1,0 +1,29 @@
+.modal .upload-photo {
+  display: none;
+}
+
+.modal .card {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.modal .section-title {
+  text-align: center;
+}
+
+.no-content {
+  display: flex;
+  margin-left: 2%;
+  max-width: 60%;
+}
+
+.no-content .no-content-img {
+  display: block;
+  flex: 1;
+} 
+
+.no-content .no-content-text {
+  color: var(--huezoos-light-green-3);
+  flex: 1;
+
+}

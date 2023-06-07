@@ -37,7 +37,11 @@
           <h1>Registro de nuevo usuario</h1>
         </div>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><i class="material-icons">more_vert</i></li>
+          <li><i data-target="headerMenu" class="material-icons three-dot-btn">more_vert</i></li>
+        </ul>
+        <!-- Dropdown Structure -->
+        <ul id='headerMenu' class='dropdown-content'>
+          <li><a href="#!">Cerrar sesión</a></li>
         </ul>
       </div>
     </nav>
@@ -50,6 +54,7 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{% static 'js/header.js' %}"></script>
 
   {% block scripts %}
   {% endblock %}

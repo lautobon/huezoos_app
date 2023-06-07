@@ -1,6 +1,8 @@
 {% extends 'template.html' %}
 {% load static %}
-
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home_user.css' %}">
+{% endblock %}
 {% block main_content %}
 
 <main class="default-layout">
@@ -17,8 +19,13 @@
                     <p class="email"><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
                     <p class="text-helper">+57 {{ user.telephone1 }}</p>
                 </div>
-                <i class="material-icons">more_vert</i>
+                <i class="dropdown-user-card three-dot-btn material-icons" data-target='dropdownUserCard'>more_vert</i>
             </article>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdownUserCard' class='dropdown-content'>
+                <li><a href="#!">Editar Perfil</a></li>
+            </ul>
 
             <!-- /- User Card Info -->
         </div>
@@ -41,7 +48,12 @@
                     <i class="icon icon-male"></i>
                     {% endif %}
                 </div>
-                <i class="material-icons">more_vert</i>
+                <i class="dropdown-pet material-icons three-dot-btn" data-target="dropdownPet{{pet.id}}">more_vert</i>
+
+                <!-- Dropdown Structure -->
+                <ul id='dropdownPet{{pet.id}}' class='dropdown-content'>
+                    <li><a href="#!">Borrar Mascota</a></li>
+                </ul>
             </article>
 
             {% endfor %}
@@ -71,20 +83,29 @@
             </article> -->
         </div>
 
-        <button class="btn btn-center waves-effect waves-light" type="button">
+        <button id="addPet" class="btn btn-center waves-effect waves-light" data-target="petModal">
             Agregar mascotas
         </button>
     </aside>
     <!--/- Aside -->
     <!-- Agenda -->
     <section>
-        <h3 class="section-title">Citas agendadas</h3>
 
         {%if appointments.count == 0 %}
-        <p>No hay citas programadas</p>
+        <article class="no-content">
+            <img class="no-content-img" src="{% static 'images/cat.png' %}" alt="Huezoos">
+
+            <div class="no-content-text">
+                <h3>
+                    No tiene citas programadas
+                </h3>
+            </div>
+        </article>
         {%endif%}
 
         {% for appointment in appointments %}
+        <h3 class="section-title">Citas agendadas</h3>
+
         <article class="card card-pet-info card-agenda-item">
             <div class="card-content">
                 <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
@@ -99,9 +120,11 @@
                 <form method="POST" action="/appointment/cancel">
                     {% csrf_token %}
                     <input type="hidden" name="appointment_id" value="{{appointment.id}}">
-                    <button type="submit" id="cancelBtn" class="btn btn-bg-color-green1  waves-effect waves-light">Cancelar</button>
+                    <button type="submit" id="cancelBtn"
+                        class="btn btn-bg-color-green1  waves-effect waves-light">Cancelar</button>
                 </form>
-                <a class="btn btn-bg-color-green2 waves-effect waves-light" href="/appointment?id={{appointment.id}}">Editar</a>
+                <a class="btn btn-bg-color-green2 waves-effect waves-light"
+                    href="/appointment?id={{appointment.id}}">Editar</a>
                 <button class="btn btn-bg-color-green3 waves-effect waves-light">Detalles</button>
             </div>
         </article>
@@ -112,5 +135,30 @@
     </section>
     <!--/- Agenda -->
 </main>
+
+<!-- Modal Structure -->
+<div id="petModal" class="modal">
+    <form id="addPetForm" method="POST" action="/addPet">
+        {% csrf_token %}
+        <div class="modal-content">
+            <h3 class="section-title">Nueva mascota</h3>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="modal-close waves-effect waves-green btn-flat">Agregar</button>
+        </div>
+    </form>
+</div>
+
+{% include 'petForm.html' %}
+
+{% endblock %}
+{% block scripts %}
+
+<script>
+    const petCount = {{ pets| length}}
+</script>
+
+<script src="{% static 'js/userTools.js' %}"></script>
+<script src="{% static 'js/userAddPet.js' %}"></script>
 
 {% endblock %}

@@ -270,6 +270,10 @@ a.btn-center:hover {
   align-items: center;
 }
 
+.topbar .dropdown-content {
+  width: 120px !important;
+}
+
 .input-date {
   position: relative;
 }
@@ -292,3 +296,6 @@ a.btn-center:hover {
   color: var( --huezoos-theme-gray-3);
 }
 
+.three-dot-btn {
+  cursor: pointer;
+}

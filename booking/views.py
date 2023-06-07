@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.shortcuts import render
 from datetime import datetime
 from django.http import HttpResponse
@@ -19,15 +20,46 @@ def auth_home(request):
         owner: Owner = Owner.objects.get(email=user)
         user_id = owner.pk
         # Obtener todo y filtrar por 1 criterio
-        pets: list[Pet] = Pet.objects.all().filter(owner_id=user_id)
+        user_pets: list[Pet] = Pet.objects.all().filter(owner_id=user_id)
+        races = Race.objects.all()
+        species = Species.objects.all()
         appointments: list[Appointment] = Appointment.objects.all().filter(user_id=user_id)
+        new_dict_pets = defaultdict(dict)
 
         if request.method == 'POST' and request.path == '/appointment/cancel':
             Appointment.objects.filter(id=request.POST["appointment_id"]).delete()
 
             return redirect('home')
+        
+        if request.method == 'POST' and request.path == '/addPet':
+     
+            for key, value in request.POST.items():
+                if key.startswith('pet'):
+                    field_name = key.split('.')[2]
+                    pet_num = int(key.split('.')[1]) - 1
 
-        return render(request, 'home_user.html', {'user': owner, 'pets': pets, 'appointments': appointments})
+                    new_dict_pets[pet_num][field_name]=value
+
+            new_dict_pets = list(new_dict_pets.values())
+
+            print(new_dict_pets)
+
+            for petEntry in new_dict_pets:
+
+                race = Race.objects.get(id=petEntry['razaMascota'])
+
+                pet = Pet(
+                    name=petEntry['nombreMascota'],
+                    age=int(petEntry['edadMascota']),
+                    gender=petEntry['generoMascota'],
+                    owner=owner,
+                    race=race
+                )
+                pet.save()
+
+            return redirect('home')
+
+        return render(request, 'home_user.html', {'user': owner, 'pets': user_pets, 'appointments': appointments, 'races': races, 'species': species})
 
     return render(request, 'login.html', {}) 
 

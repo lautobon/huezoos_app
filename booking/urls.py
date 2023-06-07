@@ -10,5 +10,6 @@ urlpatterns = [
     path('appointment', user_appointment, name='appointment'),
     path('appointment/cancel', auth_home, name='appointment_cancel'),
     path('appointment/success', user_appointment_success, name='appointment_success'),
+    path('addPet', auth_home, name='add_pet'),
 
 ]
