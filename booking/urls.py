@@ -1,5 +1,5 @@
 from django.urls import path  
-from .views import register_form, login_huezoos, auth_home, user_appointment, user_appointment_success, edit_user
+from .views import register_form, login_huezoos, auth_home, user_appointment, user_appointment_success, edit_user, logout_user
 
 urlpatterns = [
     #path('', home, name='index'),
@@ -16,7 +16,9 @@ urlpatterns = [
     path('pet/add', auth_home, name='add_pet'),
     path('pet/delete', auth_home, name='delete_pet'),
 
-    path('user/edit', edit_user, name='edit_user')
+    path('user/edit', edit_user, name='edit_user'),
+
+    path('user/logout', logout_user, name='logout_user')
     
 
 ]

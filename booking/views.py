@@ -1,11 +1,10 @@
 from collections import defaultdict
 from django.shortcuts import render
 from datetime import datetime
-from django.http import HttpResponse
 from .forms import RegisterForm, UserUpdateForm
-from django.utils import timezone, dateformat
+from django.utils import dateformat
 from django.shortcuts import redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .models import Appointment, Owner, Pet, Race, Species
 from .constants import SERVICIOS, HORARIOS, GENERO
@@ -201,4 +200,9 @@ def edit_user(request):
             form = UserUpdateForm(instance=owner)
 
         return render(request, 'edit_user.html', {'form': form})
+    return redirect('login')
+
+
+def logout_user(request):
+    logout(request)
     return redirect('login')
