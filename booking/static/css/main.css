@@ -89,9 +89,22 @@ a.btn-center:hover {
   width: 130px !important;
 }
 
-.dropdown-content li > a{
+
+.dropdown-content li>a,
+.dropdown-content li>button {
   color: var(--huezoos-theme-gray-2);
   font-size: 12px;
+}
+
+
+.dropdown-content button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  padding: 14px 16px;
+
 }
 
 .card.card-user-info .material-icons,
@@ -143,7 +156,7 @@ a.btn-center:hover {
 }
 
 .card .card-pet-info-details p:nth-of-type(1) {
-  color:rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   font-size: 16px;
 }
 
@@ -293,7 +306,7 @@ a.btn-center:hover {
 }
 
 .text-helper {
-  color: var( --huezoos-theme-gray-3);
+  color: var(--huezoos-theme-gray-3);
 }
 
 .three-dot-btn {

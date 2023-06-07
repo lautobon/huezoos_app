@@ -58,7 +58,8 @@ class BaseHuezoosUserManager(BaseUserManager):
         # user.active = True
         # user.save(using=self._db)
         return self.create_user(email, password, is_admin=True, is_staff=True, is_superuser=True)
-
+    
+    
 class HuezoosUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)

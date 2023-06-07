@@ -2,7 +2,7 @@ from collections import defaultdict
 from django.shortcuts import render
 from datetime import datetime
 from django.http import HttpResponse
-from .forms import RegisterForm
+from .forms import RegisterForm, UserUpdateForm
 from django.utils import timezone, dateformat
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
@@ -31,7 +31,7 @@ def auth_home(request):
 
             return redirect('home')
         
-        if request.method == 'POST' and request.path == '/addPet':
+        if request.method == 'POST' and request.path == '/pet/add':
      
             for key, value in request.POST.items():
                 if key.startswith('pet'):
@@ -59,6 +59,11 @@ def auth_home(request):
 
             return redirect('home')
 
+        if request.method == 'POST' and request.path == '/pet/delete':
+            Pet.objects.filter(id=request.POST["pet_id"]).delete()
+
+            return redirect('home')
+        
         return render(request, 'home_user.html', {'user': owner, 'pets': user_pets, 'appointments': appointments, 'races': races, 'species': species})
 
     return render(request, 'login.html', {}) 
@@ -172,7 +177,28 @@ def user_appointment(request):
 
 def user_appointment_success(request):
     context = request.session.get('appointment')
-    print(context)
     if context is None:
         return redirect('appointment')
     return render(request, 'appointment_success.html', context)
+
+@login_required
+def edit_user(request):
+    user=request.user
+    if user.is_authenticated:
+
+        owner:Owner = Owner.objects.get(email=user)
+
+        if request.method == 'POST':
+            form = UserUpdateForm(request.POST, instance=owner)
+
+            if form.is_valid():
+                form.save()
+
+                return redirect('home')
+
+        else:
+
+            form = UserUpdateForm(instance=owner)
+
+        return render(request, 'edit_user.html', {'form': form})
+    return redirect('login')

@@ -1,0 +1,79 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+{% block main_content %}
+<form method="POST" id="editUser" class="container">
+    {% csrf_token %}
+    <section class="container-user-data">
+
+        <div class="input-field">
+            {{form.first_name.label_tag}}
+            {{form.first_name}}
+        </div>
+
+        <div class="input-field">
+            {{form.last_name.label_tag}}
+            {{form.last_name}}
+        </div>
+
+
+        <div class="input-field">
+            {{form.address.label_tag}}
+            {{form.address}}
+        </div>
+
+        <div class="input-field">
+            {{form.city.label_tag}}
+            {{form.city}}
+        </div>
+
+        <div class="input-field">
+            {{form.telephone1.label_tag}}
+            {{form.telephone1}}
+        </div>
+
+        <div class="input-field">
+            {{form.telephone2.label_tag}}
+            {{form.telephone2}}
+        </div>
+
+
+        <!-- <div class="input-field">
+            {{form.password1.label_tag}}
+            {{form.password1}}
+        </div>
+
+        <div class="input-field">
+            {{form.password2.label_tag}}
+            {{form.password2}}
+        </div> -->
+    </section>
+
+    
+
+    <button class="btn btn-register btn-primary waves-effect waves-light" type="submit">
+        Actualizar Usuario
+    </button>
+
+    <!-- Inicio seccion mascotas-->
+
+    <!--/ Fin mascotas -->
+
+    {% if errors %}
+
+    {% for fields in errors.values %}
+    {% for error in fields %}
+    <p>{{error}}</p>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+</form>
+
+{% endblock %}
+{% block scripts %}
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock %}

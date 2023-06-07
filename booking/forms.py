@@ -1,7 +1,8 @@
 from collections import defaultdict
 from django.utils import timezone, dateformat
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import Owner, Pet, Race
+from django import forms
 
 
 
@@ -43,3 +44,9 @@ class RegisterForm(UserCreationForm):
                 pet.save()
 
         return owner
+
+
+class UserUpdateForm(UserChangeForm):
+    class Meta:
+        model = Owner
+        fields = ( 'first_name', 'last_name', 'address', 'city', 'telephone1', 'telephone2')
