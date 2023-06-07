@@ -28,13 +28,16 @@
     <nav class="grey-text text-darken-1 grey lighten-5">
       <div class="nav-wrapper">
         <a href="#" class="grey-text text-darken-1">
-          <i class="material-icons">arrow_back</i>
+          <!-- <i class="material-icons">arrow_back</i> -->
         </a>
         <div class="content-ref">
           <h2 class="logo">
             <img src="{% static 'images/logo.svg' %}" alt="Huezoos">
           </h2>
-          <h1>Registro de nuevo usuario</h1>
+          <h1>
+            {% block header_title %}
+            {% endblock %}
+          </h1>
         </div>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><i data-target="headerMenu" class="material-icons three-dot-btn">more_vert</i></li>

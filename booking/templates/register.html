@@ -3,6 +3,10 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
+{% block header_title %}
+Registro de usuario
+{% endblock %}
+
 {% block main_content %}
 <form method="POST" id="registerUser" class="container">
     {% csrf_token %}

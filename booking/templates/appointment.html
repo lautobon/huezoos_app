@@ -3,6 +3,10 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/agenda.css' %}">
 {% endblock %}
+{% block header_title %}
+Agendamiento cita
+{% endblock %}
+
 {% block main_content %}
 <form method="POST" id="agenda" class="container">
     {% csrf_token %}

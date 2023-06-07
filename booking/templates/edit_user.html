@@ -3,6 +3,12 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
+
+{% block header_title %}
+Editando: {{ user.first_name }}
+{% endblock %}
+
+
 {% block main_content %}
 <form method="POST" id="editUser" class="container">
     {% csrf_token %}

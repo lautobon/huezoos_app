@@ -3,8 +3,11 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/home_user.css' %}">
 {% endblock %}
-{% block main_content %}
+{% block header_title %}
+Bienvenido, {{ user.first_name }}
+{% endblock %}
 
+{% block main_content %}
 <main class="default-layout">
     <!-- Aside -->
     <aside>
@@ -35,7 +38,7 @@
             {% for pet in pets %}
             <article class="card card-pet-info">
                 <div class="card-content">
-                    
+
                     {% if pet.race.specie.name == 'Perro' %}
                     <figure class="card-profile-pic"><img src="https://placedog.net/60/60" alt=""></figure>
                     {% endif %}
@@ -61,9 +64,9 @@
                     <form method="POST" action="/pet/delete">
                         {% csrf_token %}
                         <input type="hidden" name="pet_id" value="{{pet.id}}">
-                
+
                         <li><button type="submit">Borrar Mascota</button></li>
-                
+
                     </form>
                 </ul>
             </article>
@@ -137,7 +140,8 @@
                 </form>
                 <a class="btn btn-bg-color-green2 waves-effect waves-light"
                     href="/appointment?id={{appointment.id}}">Editar</a>
-                <a class="btn btn-bg-color-green3 waves-effect waves-light" href="/appointment/detail?id={{appointment.id}}">Detalles</a>
+                <a class="btn btn-bg-color-green3 waves-effect waves-light"
+                    href="/appointment/detail?id={{appointment.id}}">Detalles</a>
             </div>
         </article>
         {% endfor %}
