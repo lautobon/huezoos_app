@@ -180,6 +180,23 @@ def user_appointment_success(request):
         return redirect('appointment')
     return render(request, 'appointment_success.html', context)
 
+
+def user_appointment_detail(request):
+    appointment_id = request.GET.get('id')
+
+    if appointment_id is None:
+        return redirect('home')
+    
+
+    appointment = Appointment.objects.get(id=appointment_id)
+
+    if appointment is None:
+        return redirect('home')
+
+    context = appointment.__dict__
+
+    return render(request, 'appointment_success.html', context)
+
 @login_required
 def edit_user(request):
     user=request.user
