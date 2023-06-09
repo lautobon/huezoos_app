@@ -15,66 +15,131 @@ Registro de usuario
         <div class="input-field">
             {{form.first_name.label_tag}}
             {{form.first_name}}
+
+            {% if form.first_name.errors %}
+            {% for error in form.first_name.errors %}
+            <span class="error-msn">{{error}}</span0>
+                {% endfor %}
+                {% endif %}
         </div>
 
         <div class="input-field">
             {{form.last_name.label_tag}}
             {{form.last_name}}
+
+            {% if form.last_name.errors %}
+            {% for error in form.last_name.errors %}
+            <span class="error-msn">{{error}}</span0>
+                {% endfor %}
+                {% endif %}
         </div>
 
         <div class="input-field full-width">
             {{form.email.label_tag}}
             {{form.email}}
+
+            {% if form.email.errors %}
+            {% for error in form.email.errors %}
+            <span class="error-msn">{{error}}</span0>
+                {% endfor %}
+                {% endif %}
         </div>
 
 
         <div class="full-width select-document">
 
             <div class="input-field select-document-dropdown">
-             
+
                 <select name="{{ form.id_type.name }}">
                     <option value="" disabled selected>Tipo Doc</option>
                     {% for choice in form.id_type.field.choices %}
                     <option value="{{ choice.0 }}">{{ choice.0 }}</option>
                     {% endfor %}
                 </select>
+                {% if form.id_type.errors %}
+                {% for error in form.id_type.errors %}
+                <span class="error-msn">{{error}}</span0>
+                {% endfor %}
+                {% endif %}
             </div>
 
             <div class="input-field select-document-number">
                 {{form.id_no.label_tag}}
                 {{form.id_no}}
+
+                {% if form.id_no.errors %}
+                {% for error in form.id_no.errors %}
+                <span class="error-msn">{{error}}</span0>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
 
         <div class="input-field">
             {{form.address.label_tag}}
             {{form.address}}
+
+            {% if form.address.errors %}
+            {% for error in form.address.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="input-field">
             {{form.city.label_tag}}
             {{form.city}}
+
+            {% if form.city.errors %}
+            {% for error in form.city.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="input-field">
             {{form.telephone1.label_tag}}
             {{form.telephone1}}
+
+            {% if form.telephone1.errors %}
+            {% for error in form.telephone1.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="input-field">
             {{form.telephone2.label_tag}}
             {{form.telephone2}}
+
+            {% if form.telephone2.errors %}
+            {% for error in form.telephone2.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
 
 
         <div class="input-field">
             {{form.password1.label_tag}}
             {{form.password1}}
+
+            {% if form.password1.errors %}
+            {% for error in form.password1.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="input-field">
             {{form.password2.label_tag}}
             {{form.password2}}
+
+            {% if form.password2.errors %}
+            {% for error in form.password2.errors %}
+            <span class="error-msn">{{error}}</span0>
+            {% endfor %}
+            {% endif %}
         </div>
     </section>
 
@@ -87,28 +152,27 @@ Registro de usuario
             <div class="card card-left">
                 <div class="card-content">
                     <div class="container-photo-name">
-    
+
                         <!-- <div class="upload-photo">
                             <i class="material-icons">cloud_upload</i>
                         </div> -->
-    
+
                         <div class="input-field input-name">
-                            <input id="pet.1.nombreMascota"  type="text" class="validate"
-                                name="pet.1.nombreMascota">
+                            <input id="pet.1.nombreMascota" type="text" class="validate" name="pet.1.nombreMascota">
                             <label for="pet.1.nombreMascota">Nombre</label>
                         </div>
                     </div>
-    
+
                     <div class="input-field input-gender">
                         <input id="pet.1.generoMascota" type="text" class="validate" name="pet.1.generoMascota">
                         <label for="pet.1.generoMascota">Género</label>
                     </div>
-    
+
                     <div class="input-field input-age">
                         <input id="pet.1.edadMascota" type="text" class="validate" name="pet.1.edadMascota">
                         <label for="pet.1.edadMascota">Edad</label>
                     </div>
-    
+
                     <div class="input-field">
                         <select class="species" name="pet.1.especieMascota">
                             <option value="" disabled selected>Especie</option>
@@ -117,7 +181,7 @@ Registro de usuario
                             {% endfor %}
                         </select>
                     </div>
-    
+
                     <div class="input-field">
                         <select class="race" name="pet.1.razaMascota">
                             <option value="" disabled selected>Raza</option>
@@ -126,7 +190,7 @@ Registro de usuario
                             {% endfor %}
                         </select>
                     </div>
-    
+
                 </div>
             </div>
             <!--/ General info -->
@@ -171,7 +235,7 @@ Registro de usuario
                 </div> -->
             <!--/ datos salud -->
         </article>
-    
+
     </section>
 
     <div class="btn-container">
@@ -188,14 +252,14 @@ Registro de usuario
 
     <!--/ Fin mascotas -->
 
-    {% if errors %}
+    <!--     {% if errors %}
 
     {% for fields in errors.values %}
     {% for error in fields %}
     <p>{{error}}</p>
     {% endfor %}
     {% endfor %}
-    {% endif %}
+    {% endif %} -->
 </form>
 
 {% endblock %}

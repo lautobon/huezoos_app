@@ -17,6 +17,7 @@
   --huezoos-theme-gray-1: #9e9e9e;
   --huezoos-theme-gray-2: #616161;
   --huezoos-theme-gray-3: #A4A4A4;
+  --huezoos-theme-error: #F44336;
 }
 
 body {
@@ -311,4 +312,10 @@ a.btn-center:hover {
 
 .three-dot-btn {
   cursor: pointer;
+}
+
+.error-msn {
+  color: var(--huezoos-theme-error);
+  font-size: 12px;
+  display: block;
 }
