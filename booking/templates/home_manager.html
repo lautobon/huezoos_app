@@ -1,0 +1,72 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+{% block header_title %}
+Bienvenido, {{ user.first_name }}
+{% endblock %}
+
+{% block main_content %}
+
+<ul class="tabs tabs-admin">
+  <li class="tab"><a class="active" href="#calendarContainer">Calendario</a></li>
+  <li class="tab"><a href="#users">Usuarios</a></li>
+</ul>
+
+<main>
+  <div id="calendarContainer">
+    <div class="default-layout">
+      <aside>
+        <div id="calendar">
+          <input type="hidden" class="datepicker">
+        </div>
+      </aside>
+      <section>
+        <h3 class="section-title">Citas</h3>
+        <article class="card card-pet-info card-agenda-item">
+          <div class="card-content">
+            <figure class="card-profile-pic"><img src="https://placekitten.com/60/60" alt=""></figure>
+            <div class="card-pet-info-details">
+              <p><strong>Rocky</strong></p>
+              <p>Lunes 10 de abril, 2023 a las 10:00 AM</p>
+            </div>
+          </div>
+          <a href="#" class="dropdown-trigger" data-target="dropdown"> <i class="material-icons">more_vert</i></a>
+
+          <ul id='dropdown' class='dropdown-content'>
+            <li><a href="#!">Contactar dueño</a></li>
+            <li><a href="#!">Detalles</a></li>
+            <li><a href="#!">Cancelar cita</a></li>
+          </ul>
+
+        </article>
+      </section>
+    </div>
+  </div>
+  <div id="users">
+    <div class="container">
+      <a class="btn btn-center btn-primary waves-effect waves-light" href="/register">
+        Crear nuevo usuario
+      </a>
+      <article class="card card-pet-info card-agenda-item">
+        <div class="card-content">
+          <figure class="card-profile-pic"><img src="{% static 'images/profile_placeholder.jpeg' %}" alt=""></figure>
+          <div class="card-pet-info-details">
+            <p><strong>Michael Scarn</strong></p>
+            <p>m.scarn@dundermiffin.com</p>
+          </div>
+        </div>
+        <i class="material-icons">more_vert</i>
+      </article>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/home_manager.js' %}"></script>
+
+{% endblock %}
